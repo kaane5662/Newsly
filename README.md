@@ -1,5 +1,5 @@
 # Newsly
-Full Stack News Application Framework using Django, React, Vite, and Typescript
+Full Stack News Application Framework using Django, React, Vite, TailwindCSS, and Typescript
 
 ## Features
 - Account and authentication system
