@@ -10,6 +10,7 @@ import SignUp from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import Creation from './pages/Creation'
 import Edit from './pages/Edit'
+import Search from './pages/Search'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -47,6 +48,7 @@ function App() {
         <Route path='/signup/' Component={SignUp}></Route>
         <Route path = '/create/' Component={Creation}></Route>
         <Route path = '/create/edit/:id' Component={Edit}></Route>
+        <Route path = '/search' Component={Search}></Route>
       </Routes>
     </BrowserRouter>
   )

@@ -2,8 +2,8 @@ from django.shortcuts import render
 import json
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from .serializers import UserSerializer, ArticleSerializer, ReviewSerializer, WIPArticleSerializer
-from .models import User, Article, Review, Token, WIPArticle
+from .serializers import UserSerializer, ArticleSerializer, ReviewSerializer
+from .models import User, Article, Review, Token
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
@@ -11,7 +11,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.middleware.csrf import get_token
 from django.contrib.auth.hashers import make_password
-from .forms import ImageUploadForm
+from django.db.models import Avg
+import re
 
 
 
@@ -77,7 +78,14 @@ def get_articles(request):
     serializer = ArticleSerializer(articles, many = True)
     # data["content"] = data["content"]
     return Response(serializer.data)
-    
+
+@api_view(["GET"])
+def get_featured_article(request):
+    article = Article.objects.annotate(average_rating=Avg('reviews__rating')).filter(published = True).order_by("-average_rating").first()
+    serializer = ArticleSerializer(article, many = False)
+    return Response(serializer.data)
+
+
 @api_view(["POST"])
 @login_required
 def publish_article(request):
@@ -192,6 +200,17 @@ def specific_creation_article(request, id):
         creationArticle.delete()
         return JsonResponse({"message": "Deleted successfully"})
     
+@api_view(["PUT"])
+def get_matching_articles(request):
+    data = request.data
+    search_param = data["searchParam"]
+    try:
+        matching_articles = Article.objects.filter(title__icontains = search_param, published = True)
+    except Exception:   
+        return JsonResponse({"message": "Article not found"}, status = 401)
+    serializer = ArticleSerializer(matching_articles, many = True)
+    return JsonResponse(serializer.data, safe=False)
+
 @api_view(["POST"])
 @login_required
 def upload_article_image(request, id):

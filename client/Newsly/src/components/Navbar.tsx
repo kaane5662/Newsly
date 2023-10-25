@@ -8,6 +8,7 @@ export default function Navbar(){
     
     const [isAuth, setIsAuth] = useState(false)
     const [username, setUsername] = useState("")
+    const [searchParam, setSearchParam] = useState("")
     const navigate = useNavigate()
     
     
@@ -57,7 +58,7 @@ export default function Navbar(){
                 </div>
                 {/* center */}
                 <div className=" left-[40vw] items-center font-rcondensed flex">
-                    <input className="border-black border-2 w-[350px] border-opacity-50 h-[40px] p-4 rounded-md" placeholder="Search"></input>
+                    <input onChange={(e)=> setSearchParam(e.target.value)} onKeyDown={(e)=> e.key == "Enter"? navigate(`/search?=${searchParam}`) :null } className="border-black border-2 w-[350px] border-opacity-50 h-[40px] p-4 rounded-md" placeholder="Search"></input>
                 </div>
                 {/* right */}
                 <div className=" flex gap-8 font-rcondensed items-center">

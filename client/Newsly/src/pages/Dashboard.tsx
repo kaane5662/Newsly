@@ -47,13 +47,13 @@ export default function Dashboard(){
                 
             
             </div>
-            <div className="justify-center flex items-center gap-8">
+            {/* <div className="justify-center flex items-center gap-8">
                 <h3 className="font-bold text-lg w-6 rounded-lg  text-center" style={{backgroundColor: "black", color: "white"}}>1</h3>
                 <h3 className="font-bold text-lg">2</h3>
                 <h3 className="font-bold text-lg">3</h3>
                 <h3 className="font-bold text-lg">4</h3>
                 <h3 className="font-bold text-lg">5</h3>
-            </div>
+            </div> */}
             
             
         </main>

@@ -12,19 +12,17 @@ class ArticleSerializer(serializers.ModelSerializer):
     author_name = serializers.StringRelatedField(source = "author")
     reviews_data = serializers.StringRelatedField(source = "reviews")
     image = serializers.ImageField(allow_null=True, required=False)
+    average_review_score = serializers.SerializerMethodField()
     
     class Meta:
         model = Article
         fields = "__all__"
+    def get_average_review_score(self, obj):
+        return obj.get_review_score()   
         
 
 class ReviewSerializer(serializers.ModelSerializer):
     author_name = serializers.StringRelatedField(source = "author")
     class Meta:
         model = Review
-        fields = "__all__"
-
-class WIPArticleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WIPArticle
         fields = "__all__"

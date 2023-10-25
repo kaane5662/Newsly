@@ -13,7 +13,9 @@ urlpatterns = [
     path("create/", views.creation_article_view),
     path("create/edit/<int:id>/", views.specific_creation_article),
     path("islogged/", views.checkLogged),
-    path("create/uploadimage/<int:id>/", views.upload_article_image)
+    path("create/uploadimage/<int:id>/", views.upload_article_image),
+    path("search/", views.get_matching_articles),
+    path("getfeatured/", views.get_featured_article)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # if settings.DEBUG:

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-
+from django.db.models import Avg, Min
 
 
 # Create your models here.
@@ -29,7 +29,8 @@ class Article(models.Model):
     # paragraphs = models.ArrayField(models.CharField(max_length=10000), blank = True, null = True)
     reviews = models.ManyToManyField(Review, blank=True, null= True)
 
-
+    def get_review_score(self):
+        return self.reviews.aggregate(avg_rating = Avg("rating"))["avg_rating"]
     def __str__(self):
         return self.title +": "+ self.author.username + "\n " + self.content +" "
 

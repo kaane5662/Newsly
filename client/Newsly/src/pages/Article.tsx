@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useParams} from 'react-router-dom'
 import Review from '../components/Review'
 import WriteReview from '../components/WriteReview'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 export default function Article(){
 
@@ -14,19 +16,20 @@ export default function Article(){
     const [Reviews, setReviews] = useState([])
     const [genre, setGenre] = useState("")
     const [image, setImage] = useState("")
-    
+    const [averageRating, setAverageRating] = useState(0)
 
 
     useEffect(()=>{
 
         axios.get(`http://localhost:8000/api/articles/${id}/`).then((response)=>{
             console.log(response.data)
-            const {author_name, content, title, genre, image} = response.data
+            const {author_name, content, title, genre, image, average_review_score} = response.data
             setAuthor(author_name)
             setContent(content)
             setTitle(title)
             setGenre(genre)
             setImage(image)
+            setAverageRating(Math.floor(average_review_score*10)/10)
         }).catch(error =>{
             console.log(error)
         })
@@ -43,7 +46,13 @@ export default function Article(){
 
     return (
         <div className="px-40 py-24 gap-6   flex-col flex font-poppins ">
-            <h1 className="text-4xl font-bold max-w-[50%] leading-[50px]">{title}</h1>
+            <div className='flex justify-between'>
+                <h1 className="text-4xl font-bold max-w-[50%] leading-[50px]">{title}</h1>
+                <div className='flex gap-4 items-center justify-center'>
+                    <FontAwesomeIcon className='text-black h-8' icon={faStar}></FontAwesomeIcon>
+                    <h3 className='font-bold text-4xl'>{averageRating}</h3>
+                </div>
+            </div>
             <hr className = "h-[2px] text-black bg-black"></hr>
             <img src = {"http://localhost:8000/api"+image} className = "min-w-[100%] h-[450px] first-letter:flex flex-col gap-0 rounded-lg object-cover ">
 
