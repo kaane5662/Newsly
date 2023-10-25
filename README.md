@@ -9,7 +9,7 @@ Full Stack News Application Framework using Django, React, Vite, TailwindCSS, an
 - Reviewing and rating articles
 - Interactive and responsive UI
 - Search page for querying articles
-- Featured Article that the article with the highest average review score
+- Featured Article that gets the article with the highest average review score
 
 ## Video
 https://drive.google.com/file/d/1xA3ZlsUo63HBhnM3P7vJfngzVeGWh7sh/view?usp=sharing
