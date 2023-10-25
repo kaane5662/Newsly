@@ -4,6 +4,7 @@ import CreationHeader from "../components/CreationHeader"
 import axios from "axios"
 import { getAuthToken } from "../components/getAuthToken"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 interface userCreation {
     id: number,
@@ -12,7 +13,7 @@ interface userCreation {
 }
 
 export default function Creation(){
-
+    const navigate = useNavigate()
     
     const [UserCreations, setUserCreations] = useState([])
     const getUserCreations = () =>{
@@ -24,6 +25,9 @@ export default function Creation(){
             console.log(response.data)
             setUserCreations(response.data)
         }).catch(error =>{
+            if(error.response.status == 401){
+                navigate("/login")
+            }
             console.log(error)
         })
     }
@@ -46,6 +50,7 @@ export default function Creation(){
             // setUserCreations(response.data)
         }).catch(error =>{
             console.log(error)
+            
         })
     }
 

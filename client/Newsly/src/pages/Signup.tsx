@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
+import {motion} from "framer-motion"
 export default function SignUp(){
     const navigate = useNavigate()
     const [message, setMessage] = useState("")
@@ -28,7 +28,28 @@ export default function SignUp(){
         <div className="flex">
             <div className="w-[40%] max-w[50%]">
                 <h3 className="text-lg text-center font-semibold bg-red-800 text-white">{message}</h3>
-                <form className=" rounded-md p-12 px-24 flex-col flex gap-3 font-rcondensed   " onSubmit={(e)=> createAccount(e)}>
+                <motion.form 
+                
+                initial={{
+                    opacity: 0,
+                    scale: 1,
+                    x: "-100%"
+                }}
+                whileInView={{
+                    x: 0,
+                    y: 0,   
+                    rotate: 0,
+                    opacity: 1,
+                    scale: 1
+                }}
+                transition={{
+                    duration: 2,
+                    type:"spring",
+                    damping: 10,
+                    stiffness: 20
+                }}
+                viewport={{ once: true }}  
+                className=" rounded-md p-12 px-24 flex-col flex gap-3 font-rcondensed   " onSubmit={(e)=> createAccount(e)}>
                     <h1 className="font-bold text-4xl text-center font-poppins  ">Create an account</h1>
                     <h3 className=" text-md  text-center font-poppins text-gray-400      ">Start reading and writing blogs</h3>
                     <label htmlFor="username" className="-mx-4 text-md font-semibold text-zinc-500">Username</label>
@@ -42,7 +63,7 @@ export default function SignUp(){
                     <div className=" flex justify-center items-center mt-4  ">
                         <button type="submit" className="font-poppins w-[250px] h-[75px] text-white rounded-full text-xl border-2 bg-black font-bold duration-500 hover:scale-105">Sign up</button>
                     </div>
-                </form>
+                </motion.form>
 
             </div>
             <div className="w-[60%] h-[100vh] bg-black">

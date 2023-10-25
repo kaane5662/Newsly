@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { motion } from "framer-motion"
 
 export default function Login(){
     const navigate = useNavigate()
@@ -31,7 +32,27 @@ export default function Login(){
     return (
         <div className="px-[500px] py-12  ">
             
-            <form onSubmit={(e)=> login(e)} className=" shadow-xl rounded-md p-12 flex-col flex gap-6 font-rcondensed bg-white bg-blur   ">
+            <motion.form 
+            initial={{
+                opacity: 0,
+                scale: 1,
+                y: "100%"
+            }}
+            whileInView={{
+                x: 0,
+                y: 0,   
+                rotate: 0,
+                opacity: 1,
+                scale: 1
+            }}
+            transition={{
+                duration: 2,
+                type:"spring",
+                damping: 10,
+                stiffness: 20
+            }}
+            viewport={{ once: true }}   
+            onSubmit={(e)=> login(e)} className=" shadow-xl rounded-md p-12 flex-col flex gap-6 font-rcondensed bg-white bg-blur   ">
                 <h1 className="font-bold text-4xl text-center font-poppins  ">Login</h1>
                 <h3 className="text-lg text-center font-semibold text-red-800">{message}</h3>
 
@@ -42,7 +63,7 @@ export default function Login(){
                 <div className=" flex justify-center items-center mt-12">
                     <button type="submit" className=" hover:bg-black hover:text-white duration-500 hover:scale-105 font-sans w-[250px] h-[75px] rounded-md text-xl border-2 border-black font-bold">Login</button>
                 </div>
-            </form>
+            </motion.form>
         </div>
     )
    

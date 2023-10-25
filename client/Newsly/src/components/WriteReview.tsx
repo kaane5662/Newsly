@@ -1,11 +1,12 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { useParams} from 'react-router-dom'
+import { useNavigate, useParams} from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 
-export default function WriteReview({id}: any){
+export default function WriteReview({id}: any){     
+    const navigate = useNavigate()
 
     function getAuthToken() {
         const cookies = document.cookie.split('; ');
@@ -41,6 +42,9 @@ export default function WriteReview({id}: any){
             console.log(response.data)
             window.location.reload()
         }).catch((error)=>{
+            if(error.response.status == 401){
+                navigate("/login")
+            }
             console.log(error)
         })
 
