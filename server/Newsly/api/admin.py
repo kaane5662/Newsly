@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Article, Review, WIPArticle
+from .models import Article, Review
 
 
 
@@ -10,5 +10,5 @@ from .models import Article, Review, WIPArticle
 # Register your models here.
 admin.site.register(Article)
 admin.site.register(Review)
-admin.site.register(WIPArticle)
+# admin.site.register(WIPArticle)
 

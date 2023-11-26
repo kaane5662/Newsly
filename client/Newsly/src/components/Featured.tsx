@@ -10,7 +10,7 @@ export default function Featured(){
         author_name: String,
         title: String,
         content: String,
-        average_review_score: Number,
+        average_rating: Number,
         genre: String,
         image: String,
         id: Number
@@ -41,7 +41,7 @@ export default function Featured(){
            
             <div className="right-10 absolute top-10 flex gap-4 items-center justify-center">
                 <FontAwesomeIcon className="h-8 text-white" icon={faStar}></FontAwesomeIcon>
-                <h3 className="text-4xl font-bold text-white">{ (Math.floor(FeaturedData?.average_review_score * 10)/10)}</h3>
+                <h3 className="text-4xl font-bold text-white">{ (Math.floor(FeaturedData?.average_rating * 10)/10)}</h3>
             </div>
 
             <div className="left-10 bottom-10 absolute flex flex-col gap-4 font-rcondensed text ">

@@ -33,7 +33,7 @@ export default function WriteReview({id}: any){
         const token = getAuthToken()
         const auth = "Token "+token
         console.log(auth)
-        axios.put(`http://localhost:8000/api/reviews/post/${id}/`, data,{
+        axios.post(`http://localhost:8000/api/articles/reviews/${id}/`, data,{
             headers: {
                 Authorization: auth
             },
